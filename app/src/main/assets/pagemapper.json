@@ -1,0 +1,117 @@
+{
+  "components": [
+    {
+      "value": "textView",
+      "content_model_uid": "r_sponsors",
+      "uid": "ext93c382c7af54e8d813a136e7",
+      "label": "Text View",
+      "variant": "grizzDenTextTheme",
+      "variant_label": "Grizz Den Home",
+      "content_model_label": "R_Sponsors",
+      "content_type": "contentstack",
+      "content_entry_uid": "blt6a18d542ee4a377a",
+      "content_entry_label": "Sponsor International Paper",
+      "content_entry_data": {
+        "_version": 1,
+        "content": "Sample text",
+        "locale": "en-us",
+        "uid": "blt6a18d542ee4a377a",
+        "ACL": {},
+        "_in_progress": false,
+        "created_at": "2023-12-06T08:26:15.333Z",
+        "created_by": "blt94ccafa96667a9c5",
+        "cta": "https://www.google.com",
+        "image": null,
+        "open_the_link": "Internal Browser",
+        "sponsor_prefix_text": "PRESENTED BY",
+        "sponsor_text": "INTERNATIONAL PAPER",
+        "tags": [],
+        "title": "Sponsor International Paper",
+        "tracking_id": "1234",
+        "updated_at": "2023-12-06T08:26:15.333Z",
+        "updated_by": "blt94ccafa96667a9c5",
+        "publish_details": {
+          "environment": "bltccc5b43556bd4b94",
+          "locale": "en-us",
+          "time": "2023-12-06T12:55:48.093Z",
+          "user": "blt94ccafa96667a9c5"
+        }
+      }
+    },
+    {
+      "value": "textView",
+      "content_model_uid": "r_sponsors",
+      "uid": "ext93c382c7af54e8d813a136e8",
+      "label": "Text View",
+      "variant": "grizzDenTextTheme",
+      "variant_label": "Grizz Den Home",
+      "content_model_label": "R_Sponsors",
+      "content_type": "contentstack",
+      "content_entry_uid": "blt6a18d542ee4a377a",
+      "content_entry_label": "Sponsor International Paper",
+      "content_entry_data": {
+        "_version": 1,
+        "content": "Sample text New Jan 8",
+        "locale": "en-us",
+        "uid": "blt6a18d542ee4a377a",
+        "ACL": {},
+        "_in_progress": false,
+        "created_at": "2023-12-06T08:26:15.333Z",
+        "created_by": "blt94ccafa96667a9c5",
+        "cta": "https://www.google.com",
+        "image": null,
+        "open_the_link": "Internal Browser",
+        "sponsor_prefix_text": "PRESENTED BY",
+        "sponsor_text": "INTERNATIONAL PAPER",
+        "tags": [],
+        "title": "Sponsor International Paper",
+        "tracking_id": "1234",
+        "updated_at": "2023-12-06T08:26:15.333Z",
+        "updated_by": "blt94ccafa96667a9c5",
+        "publish_details": {
+          "environment": "bltccc5b43556bd4b94",
+          "locale": "en-us",
+          "time": "2023-12-06T12:55:48.093Z",
+          "user": "blt94ccafa96667a9c5"
+        }
+      }
+    }
+  ],
+  "menu": {
+    "_version": 1,
+    "locale": "en-us",
+    "uid": "blt1595b59ab482d83d",
+    "ACL": {},
+    "_in_progress": false,
+    "created_at": "2023-11-17T07:28:01.062Z",
+    "created_by": "blt89435a061fb51dbd",
+    "option_list": [
+      {
+        "title": "Testing menu",
+        "cta_text": "Testing menu CTA",
+        "cta_link": "",
+        "cta_icon": null,
+        "open_the_link_on": null,
+        "type": "Other",
+        "_metadata": {
+          "uid": "cs76bea98cec05f9e0"
+        }
+      }
+    ],
+    "tags": [],
+    "title": "Testing menu",
+    "updated_at": "2023-11-17T07:28:01.062Z",
+    "updated_by": "blt89435a061fb51dbd",
+    "publish_details": {
+      "environment": "bltccc5b43556bd4b94",
+      "locale": "en-us",
+      "time": "2023-12-06T12:55:05.379Z",
+      "user": "blt94ccafa96667a9c5"
+    }
+  },
+  "uids": {
+    "entryUID": "bltc8f04f74d6d6752a",
+    "timeframeUID": "cs232f481cb63ac417",
+    "segmentUID": "cs9ec3efbdf90a2744"
+  }
+}
