@@ -1,18 +1,16 @@
 package com.raweng.pagemapper.pagemappersdk
 
 import android.app.Application
-import com.raweng.dfe.modules.policy.RequestType
-import com.raweng.dfe_components_android.services.themeManager.ThemeMapper
-import com.raweng.pagemapper.pagemappersdk.data.manager.api.CMSApiManager
-import com.raweng.pagemapper.pagemappersdk.data.manager.api.DFEApiManager
-import com.raweng.pagemapper.pagemappersdk.domain.CMSModel
-import com.raweng.pagemapper.pagemappersdk.domain.NbaModel
-import com.raweng.pagemapper.pagemappersdk.mapper.DFEConfigMapper
+import com.raweng.dfe.models.config.DFEConfigModel
+import com.raweng.pagemapper.pagemappersdk.cmsreference.ComponentCMSIncludeReference
+import com.raweng.pagemapper.pagemappersdk.data.api.CMSApiManager
+import com.raweng.pagemapper.pagemappersdk.domain.dfep.CMSModel
+import com.raweng.pagemapper.pagemappersdk.domain.dfep.DFERequest
+import com.raweng.pagemapper.pagemappersdk.domain.dfep.NbaModel
+import com.raweng.pagemapper.pagemappersdk.domain.dfep.PubNubModel
+import com.raweng.pagemapper.pagemappersdk.mapper.config.DFEConfigMapper
+import com.raweng.pagemapper.pagemappersdk.placeholder.ComponentPlaceHolder
 import com.raweng.pagemapper.pagemappersdk.type.Components
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.util.EnumMap
 
 
@@ -20,33 +18,36 @@ object PageMapperSDK {
 
     private lateinit var application: Application
     private lateinit var configMapper: DFEConfigMapper
-    private val componentPlaceholder = EnumMap<Components, Int>(Components::class.java)
+    lateinit var PUBNUB_SUB_KEY: String
 
     fun init(application: Application) {
         this.application = application
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val mConfig = DFEApiManager.fetchConfig(null, RequestType.Network)
-                configMapper = DFEConfigMapper(mConfig)
-                val cmsModel = configMapper.getCMSModel()
-                CMSApiManager.initContentStack(
-                    application = application,
-                    key = cmsModel.app_key,
-                    token = cmsModel.delivery_token,
-                    env = cmsModel.environment,
-                    cdnUrl = cmsModel.url
-                )
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+    }
+
+    fun setConfig(config: DFEConfigModel) {
+        try {
+            configMapper = DFEConfigMapper(config)
+            val cmsModel = configMapper.getCMSModel()
+            CMSApiManager.initContentStack(
+                application = application,
+                key = cmsModel.app_key,
+                token = cmsModel.delivery_token,
+                env = cmsModel.environment,
+                cdnUrl = cmsModel.url
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-
-
     }
 
-    fun setPlaceHolder(components: Components, placeHolder: Int) {
-        componentPlaceholder[components] = placeHolder
+    fun setComponentPlaceHolder(components: Components, placeHolder: Any) {
+        ComponentPlaceHolder.config(components, placeHolder)
     }
+
+    fun setComponentCMSIncludeRef(components: Components, includeRef: Array<String>) {
+        ComponentCMSIncludeReference.config(components, includeRef)
+    }
+
 
     internal fun getCMSModel(): CMSModel? {
         if (this::configMapper.isInitialized) {
@@ -62,9 +63,22 @@ object PageMapperSDK {
         return null
     }
 
-    internal fun getComponentPlaceholder(components: Components): Int? {
-        return componentPlaceholder.get(components)
+    internal fun getPubNubModel(): PubNubModel? {
+        if (this::configMapper.isInitialized) {
+            return configMapper.getPubNubModel()
+        }
+        return null
     }
+
+    internal fun getDFERequest(): DFERequest {
+        return DFERequest(
+            fields = null,
+            year = configMapper.getNBAModel().year,
+            leagueId = configMapper.getNBAModel().league_id,
+            teamId = configMapper.getNBAModel().team_id
+        )
+    }
+
 
     internal fun getApplication(): Application? {
         if (this::application.isInitialized) {
@@ -72,5 +86,6 @@ object PageMapperSDK {
         }
         return null
     }
+
 
 }

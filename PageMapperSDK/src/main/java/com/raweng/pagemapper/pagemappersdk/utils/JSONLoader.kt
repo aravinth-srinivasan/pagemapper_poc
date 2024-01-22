@@ -2,8 +2,7 @@ package com.raweng.pagemapper.pagemappersdk.utils
 
 import android.app.Application
 import com.google.gson.Gson
-import com.raweng.pagemapper.pagemappersdk.PageMapperSDK
-import com.raweng.pagemapper.pagemappersdk.domain.DynamicScreenResponse
+import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 import java.io.IOException
 
 internal object JSONLoader {

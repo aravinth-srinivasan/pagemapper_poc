@@ -1,8 +1,8 @@
 package com.raweng.pagemapper.pagemappersdk.data.provider.customobject
 
-import com.raweng.pagemapper.pagemappersdk.data.repository.customobject.DFECustomObjectRepository
+import com.raweng.pagemapper.pagemappersdk.data.repository.dfe.customobject.DFECustomObjectRepository
 import com.raweng.pagemapper.pagemappersdk.data.usecase.customobject.DFECustomObjectUseCase
-import com.raweng.pagemapper.pagemappersdk.domain.DynamicScreenResponse
+import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
 
 class DFECustomObjectDataProvider(

@@ -11,3 +11,14 @@ inline fun <reified T> convertJsonObjectToModel(jsonObject: JsonObject?): T? {
     val gson = Gson()
     return gson.fromJson(jsonObject, T::class.java)
 }
+
+
+fun <T> convertJsonObjectToModel(jsonObject: JsonObject?, clazz: Class<T>): T? {
+    if (jsonObject == null) {
+        return null
+    }
+
+    val gson = Gson()
+    return gson.fromJson(jsonObject, clazz)
+}
+

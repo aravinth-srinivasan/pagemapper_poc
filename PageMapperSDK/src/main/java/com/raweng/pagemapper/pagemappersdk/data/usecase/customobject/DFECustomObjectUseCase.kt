@@ -1,16 +1,14 @@
 package com.raweng.pagemapper.pagemappersdk.data.usecase.customobject
 
 import com.google.gson.Gson
-import com.raweng.pagemapper.pagemappersdk.data.repository.customobject.IDFECustomObjectRepository
-import com.raweng.pagemapper.pagemappersdk.domain.DynamicScreenResponse
-import com.raweng.pagemapper.pagemappersdk.domain.components.GoogleAdsSponsor
+import com.raweng.pagemapper.pagemappersdk.data.repository.dfe.customobject.IDFECustomObjectRepository
+import com.raweng.pagemapper.pagemappersdk.views.ads.domain.GoogleAdsSponsor
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
-import com.raweng.pagemapper.pagemappersdk.mapper.extension.toGoogleAdsDataModel
+import com.raweng.pagemapper.pagemappersdk.views.ads.extension.toGoogleAdsDataModel
 
 class DFECustomObjectUseCase(
     private val repository: IDFECustomObjectRepository
 ) {
-
 
     suspend fun execute(className: String): ResponseDataModel {
         val response = try {

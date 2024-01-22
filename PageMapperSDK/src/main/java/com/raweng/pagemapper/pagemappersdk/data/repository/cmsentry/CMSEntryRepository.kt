@@ -2,7 +2,7 @@ package com.raweng.pagemapper.pagemappersdk.data.repository.cmsentry
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.raweng.pagemapper.pagemappersdk.data.manager.api.CMSApiManager
+import com.raweng.pagemapper.pagemappersdk.data.api.CMSApiManager
 import java.lang.reflect.Type
 
 class CMSEntryRepository<T> : ICMSEntryRepository<T> {

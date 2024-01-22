@@ -35,6 +35,14 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    buildFeatures {
         compose = true
     }
 
@@ -79,6 +87,23 @@ dependencies {
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
     api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+
+    // Glide
+    api("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+
+    // Coil - Image
+    api("io.coil-kt:coil-compose:2.2.2")
+    api("io.coil-kt:coil-svg:2.2.2")
+    api("io.coil-kt:coil-gif:2.2.2")
+
+    //runtime compose
+    api("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+
+    //Pubnub
+    api("com.pubnub:pubnub-gson:4.27.0")
+
+    api("com.google.android.material:material:1.9.0")
     
 
     testImplementation("junit:junit:4.13.2")

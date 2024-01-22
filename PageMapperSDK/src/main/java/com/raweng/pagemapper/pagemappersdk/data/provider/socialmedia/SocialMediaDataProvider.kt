@@ -2,13 +2,12 @@ package com.raweng.pagemapper.pagemappersdk.data.provider.socialmedia
 
 import com.raweng.pagemapper.pagemappersdk.data.repository.cmsentry.CMSEntryRepository
 import com.raweng.pagemapper.pagemappersdk.data.usecase.socialmedia.CMSSocialMediaListUseCase
-import com.raweng.pagemapper.pagemappersdk.domain.DynamicScreenResponse
+import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
-import com.raweng.pagemapper.pagemappersdk.domain.components.SocialMediaListResponse
+import com.raweng.pagemapper.pagemappersdk.views.socialmedia.domain.SocialMediaListResponse
 
 class SocialMediaDataProvider(
     private val item: DynamicScreenResponse.Component,
-    private val componentDataMap: MutableMap<String, ResponseDataModel>,
     private val isNetworkOnly: Boolean
 ) {
 
@@ -21,7 +20,6 @@ class SocialMediaDataProvider(
             null,
             isNetworkOnly,
         )
-        componentDataMap[item.uid.orEmpty()] = mFinalData
         return mFinalData
     }
 }

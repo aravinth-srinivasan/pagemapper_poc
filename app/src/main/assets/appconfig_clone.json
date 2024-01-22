@@ -1,0 +1,8 @@
+{
+  "is_ssl": true,
+  "host": "dev-dfe-cdn-api.digitalfanexperience.com",
+  "sport_key":"dfef3f190e1ea94bb3c",
+  "env_key":"dev",
+  "query_device":"android",
+  "query_version":"1.0.0"
+}
