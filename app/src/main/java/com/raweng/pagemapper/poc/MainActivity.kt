@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import com.raweng.pagemapper.pagemappersdk.PageMapperSDK
 import com.raweng.pagemapper.pagemappersdk.RenderPageMapper
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
+import com.raweng.pagemapper.pagemappersdk.render.RenderPageMapperV2
 import com.raweng.pagemapper.pagemappersdk.type.Components
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
 import com.raweng.pagemapper.poc.ui.theme.PagemapperPocTheme
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     mConfig.value?.let {
-                        RenderPageMapper(
+                        RenderPageMapperV2(
                             viewModel = mViewModel,
                             liveGameViewModel = mLiveGameViewModel,
                             liveGameId = "0022300597",

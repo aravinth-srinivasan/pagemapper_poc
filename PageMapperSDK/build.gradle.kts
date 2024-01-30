@@ -55,6 +55,7 @@ dependencies {
     api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
     api("com.contentstack.sdk:android:3.10.1")
     api("org.jetbrains.kotlin:kotlin-reflect:1.9.22")
+    api(kotlin("reflect"))
     api( "io.realm:realm-gradle-plugin:10.15.0")
     api("com.google.code.gson:gson:2.10.1")
     api("androidx.core:core-ktx:1.12.0")
