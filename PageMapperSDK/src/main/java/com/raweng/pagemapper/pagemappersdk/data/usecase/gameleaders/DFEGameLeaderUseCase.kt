@@ -1,7 +1,7 @@
 package com.raweng.pagemapper.pagemappersdk.data.usecase.gameleaders
 
 import com.raweng.pagemapper.pagemappersdk.data.repository.dfe.gameleaders.DFEGameLeaderRepository
-import com.raweng.pagemapper.pagemappersdk.views.gamestats.domain.GameStatsResponseAndStateModel
+import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.domain.GameStatsResponseAndStateModel
 import com.raweng.pagemapper.pagemappersdk.domain.dfep.DFERequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

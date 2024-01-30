@@ -3,8 +3,8 @@ package com.raweng.pagemapper.pagemappersdk.data.usecase.socialmedia
 import com.raweng.pagemapper.pagemappersdk.data.repository.cmsentry.ICMSEntryRepository
 import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
-import com.raweng.pagemapper.pagemappersdk.views.socialmedia.domain.SocialMediaListResponse
-import com.raweng.pagemapper.pagemappersdk.views.socialmedia.extension.toSocialMediaListDataModel
+import com.raweng.pagemapper.pagemappersdk.views.components.socialmedia.domain.SocialMediaListResponse
+import com.raweng.pagemapper.pagemappersdk.views.components.socialmedia.extension.toSocialMediaListDataModel
 import com.raweng.pagemapper.pagemappersdk.utils.convertJsonObjectToModel
 
 class CMSSocialMediaListUseCase(

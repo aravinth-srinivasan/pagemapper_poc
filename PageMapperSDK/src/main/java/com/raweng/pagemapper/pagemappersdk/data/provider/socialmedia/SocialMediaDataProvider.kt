@@ -4,7 +4,7 @@ import com.raweng.pagemapper.pagemappersdk.data.repository.cmsentry.CMSEntryRepo
 import com.raweng.pagemapper.pagemappersdk.data.usecase.socialmedia.CMSSocialMediaListUseCase
 import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
-import com.raweng.pagemapper.pagemappersdk.views.socialmedia.domain.SocialMediaListResponse
+import com.raweng.pagemapper.pagemappersdk.views.components.socialmedia.domain.SocialMediaListResponse
 
 class SocialMediaDataProvider(
     private val item: DynamicScreenResponse.Component,

@@ -2,23 +2,24 @@ package com.raweng.pagemapper.pagemappersdk
 
 import android.app.Application
 import com.raweng.dfe.models.config.DFEConfigModel
-import com.raweng.pagemapper.pagemappersdk.cmsreference.ComponentCMSIncludeReference
+import com.raweng.pagemapper.pagemappersdk.dependency.cmsreference.ComponentCMSIncludeReferenceDependency
 import com.raweng.pagemapper.pagemappersdk.data.api.CMSApiManager
 import com.raweng.pagemapper.pagemappersdk.domain.dfep.CMSModel
 import com.raweng.pagemapper.pagemappersdk.domain.dfep.DFERequest
 import com.raweng.pagemapper.pagemappersdk.domain.dfep.NbaModel
 import com.raweng.pagemapper.pagemappersdk.domain.dfep.PubNubModel
 import com.raweng.pagemapper.pagemappersdk.mapper.config.DFEConfigMapper
-import com.raweng.pagemapper.pagemappersdk.placeholder.ComponentPlaceHolder
+import com.raweng.pagemapper.pagemappersdk.dependency.placeholder.ComponentPlaceHolderDependency
+import com.raweng.pagemapper.pagemappersdk.dependency.ticketmaster.TicketMasterDependency
 import com.raweng.pagemapper.pagemappersdk.type.Components
-import java.util.EnumMap
 
 
-object PageMapperSDK {
+object PageMapperSDK  {
 
     private lateinit var application: Application
     private lateinit var configMapper: DFEConfigMapper
     lateinit var PUBNUB_SUB_KEY: String
+
 
     fun init(application: Application) {
         this.application = application
@@ -41,13 +42,20 @@ object PageMapperSDK {
     }
 
     fun setComponentPlaceHolder(components: Components, placeHolder: Any) {
-        ComponentPlaceHolder.config(components, placeHolder)
+        ComponentPlaceHolderDependency.config(components, placeHolder)
     }
 
     fun setComponentCMSIncludeRef(components: Components, includeRef: Array<String>) {
-        ComponentCMSIncludeReference.config(components, includeRef)
+        ComponentCMSIncludeReferenceDependency.config(components, includeRef)
     }
 
+    fun getTicketMasterId(): String? {
+        return TicketMasterDependency.getTicketMasterId()
+    }
+
+    fun setTicketMasterId(ticketMasterId: String?) {
+        return TicketMasterDependency.setTicketMasterId(ticketMasterId)
+    }
 
     internal fun getCMSModel(): CMSModel? {
         if (this::configMapper.isInitialized) {
@@ -86,6 +94,5 @@ object PageMapperSDK {
         }
         return null
     }
-
 
 }

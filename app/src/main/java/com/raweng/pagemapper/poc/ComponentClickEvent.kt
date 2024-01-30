@@ -7,9 +7,9 @@ import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
 import com.raweng.pagemapper.pagemappersdk.type.ClickEventType
 import com.raweng.pagemapper.pagemappersdk.type.Components
 import com.raweng.pagemapper.pagemappersdk.utils.ComponentClickListener
-import com.raweng.pagemapper.pagemappersdk.views.gamestats.domain.GameStatsCardResponse
-import com.raweng.pagemapper.pagemappersdk.views.gamestats.domain.GameStatsResponseAndStateModel
-import com.raweng.pagemapper.pagemappersdk.views.imageview.domain.BaseImageResponse
+import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.domain.GameStatsCardResponse
+import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.domain.GameStatsResponseAndStateModel
+import com.raweng.pagemapper.pagemappersdk.views.components.imageview.domain.BaseImageResponse
 
 class ComponentClickEvent : ComponentClickListener {
     override fun onClickedComponent(data: ResponseDataModel, eventType: ClickEventType) {

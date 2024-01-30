@@ -3,7 +3,7 @@ package com.raweng.pagemapper
 import com.raweng.dfe_components_android.components.herocardcarousel.model.TopContainerData
 import com.raweng.pagemapper.pagemappersdk.PageMapperSDK
 import com.raweng.pagemapper.pagemappersdk.type.Components
-import com.raweng.pagemapper.pagemappersdk.views.carousel.domain.HeroCarouselPlaceHolder
+import com.raweng.pagemapper.pagemappersdk.views.components.carousel.domain.HeroCarouselPlaceHolder
 import com.raweng.pagemapper.poc.R
 
 object ComponentPlaceHolder {
