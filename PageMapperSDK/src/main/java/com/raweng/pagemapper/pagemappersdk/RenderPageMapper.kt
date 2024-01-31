@@ -1,9 +1,9 @@
 package com.raweng.pagemapper.pagemappersdk
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
+import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderComponentDependency
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderPageMapperDependency
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
@@ -29,14 +29,9 @@ fun RenderPageMapper(
 
 
     uiState.value?.data?.let {
-        Log.e("TAG", "RenderPageMapper:  recompose")
         RenderPagerMapperViews(
             viewModel,
-            RenderComponentDependency(
-                response = it,
-                gameId = dependency.gameId,
-                parentScreenName = dependency.parentScreenName
-            ),
+            getRenderComponentDependency(it, dependency),
             liveGameViewModel,
             listener
         )
@@ -47,5 +42,15 @@ fun RenderPageMapper(
             RenderTextWidgets("Page Mapper Loading....")
         }
     }
+}
+
+private fun getRenderComponentDependency(
+    response: DynamicScreenResponse,
+    dependency: RenderPageMapperDependency
+): RenderComponentDependency {
+    return RenderComponentDependency(
+        response = response,
+        dependency = dependency
+    )
 }
 

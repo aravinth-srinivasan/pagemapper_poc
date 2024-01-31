@@ -49,7 +49,7 @@ class GameStatsDataProvider(
     private fun getResponseDataModel(data: Pair<GameStatsCardResponse?, GameStatsResponseAndStateModel>): ResponseDataModel {
         val response = ResponseDataModel(item = dependency.item, apiResponse = data.second, convertedData = null)
         val dfeResponse = data.second
-        val isLiveGame = ((dfeResponse.gameLeader.isNotEmpty()) && (!dependency.gameId.isNullOrEmpty()))
+        val isLiveGame = ((dfeResponse.gameLeader.isNotEmpty()) && (!dependency.dependency.gameId.isNullOrEmpty()))
         mapper.prepareGameStatsCardViewDataModel()
         val mResponse = if (isLiveGame) {
             val liveDataModel = dfeResponse.copy(
@@ -81,7 +81,7 @@ class GameStatsDataProvider(
     private suspend fun getDFEData(): GameStatsResponseAndStateModel {
         val dfeRepository = DFEGameLeaderRepository()
         val dfeUseCase = DFEGameLeaderUseCase(dfeRepository)
-        val dfeResponse = dfeUseCase.execute(request, dependency.gameId.orEmpty())
+        val dfeResponse = dfeUseCase.execute(request, dependency.dependency.gameId.orEmpty())
         mapper.setGameLeadersAndPlayers(dfeResponse)
         return dfeResponse
     }

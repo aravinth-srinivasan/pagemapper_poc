@@ -96,8 +96,8 @@ class CarouselViewDataProvider(
             val useCase = DFEFeedUseCase(dfeFeedRepository)
             val limit = (componentDependency.item.dfepNoOfItems?.toInt() ?: 0)
             if (isWSCFeed()) {
-                if (!componentDependency.gameId.isNullOrEmpty()) {
-                    wscFeeds = useCase.execute(componentDependency.gameId.orEmpty(), limit)
+                if (!componentDependency.dependency.gameId.isNullOrEmpty()) {
+                    wscFeeds = useCase.execute(componentDependency.dependency.gameId.orEmpty(), limit)
                 } else {
                     Log.e(
                         "CarouselViewDataProvider",

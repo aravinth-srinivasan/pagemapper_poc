@@ -23,7 +23,7 @@ internal fun RenderCarouselView(
     val uiState = carouselViewModel.uiStateLiveData.observeAsState()
 
     LaunchedEffect(Unit) {
-        if (liveGameViewModel != null && !dependency.gameId.isNullOrEmpty()) {
+        if (liveGameViewModel != null && !dependency.dependency.gameId.isNullOrEmpty()) {
             carouselViewModel.fetchLiveGamePlayByPlay(liveGameViewModel)
         }
     }

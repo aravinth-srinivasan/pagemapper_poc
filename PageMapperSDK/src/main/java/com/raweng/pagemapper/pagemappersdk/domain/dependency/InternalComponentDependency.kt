@@ -2,9 +2,16 @@ package com.raweng.pagemapper.pagemappersdk.domain.dependency
 
 import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 
-data class InternalComponentDependency(
+/**
+ * Internal component dependency, This our local dependency for individual component
+ *
+ * @property item
+ * @property dependency
+ * @property isNetworkOnly
+ * @constructor Create empty Internal component dependency
+ */
+class InternalComponentDependency(
     var item: DynamicScreenResponse.Component,
-    var gameId: String? = null,
-    var parentScreenName: String? = null,
-    var isNetworkOnly: Boolean = true
+    var dependency: RenderPageMapperDependency,
+    var isNetworkOnly: Boolean = true,
 )

@@ -27,7 +27,7 @@ internal fun RenderComponents(
                     liveGameViewModel = liveGameViewModel,
                     dependency = InternalComponentDependency(
                         item = item,
-                        gameId = dependency.gameId
+                        dependency = dependency.dependency
                     ),
                     listener = listener
                 )
@@ -36,7 +36,7 @@ internal fun RenderComponents(
             Components.IMAGE_VIEW -> {
                 ImageViewComponent(
                     pageMapperViewModel = viewModel,
-                    dependency = InternalComponentDependency(item),
+                    dependency = InternalComponentDependency(item, dependency.dependency),
                     listener = listener
                 )
             }
@@ -44,14 +44,14 @@ internal fun RenderComponents(
             Components.TEXT_VIEW -> {
                 TextViewComponent(
                     viewModel,
-                    dependency = InternalComponentDependency(item)
+                    dependency = InternalComponentDependency(item, dependency.dependency)
                 )
             }
 
             Components.GAME_STATS_CARD -> {
                 GameStatsCardViewComponent(
                     viewModel,
-                    InternalComponentDependency(item, dependency.gameId),
+                    InternalComponentDependency(item, dependency.dependency),
                     liveGameViewModel,
                     listener
                 )
