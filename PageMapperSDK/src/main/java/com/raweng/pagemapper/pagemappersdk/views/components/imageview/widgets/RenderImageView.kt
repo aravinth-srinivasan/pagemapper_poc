@@ -4,12 +4,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import com.raweng.dfe_components_android.commoncomponents.imageview.CustomImageView
+import com.raweng.dfe_components_android.commoncomponents.imageview.`interface`.AnalyticsInterface
 import com.raweng.dfe_components_android.commoncomponents.imageview.model.ImageViewDataModel
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.InternalComponentDependency
 import com.raweng.pagemapper.pagemappersdk.extension.toVariant
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentAnalyticsListener
 import com.raweng.pagemapper.pagemappersdk.type.ClickEventType
-import com.raweng.pagemapper.pagemappersdk.utils.ComponentClickListener
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentEventListener
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
 import com.raweng.pagemapper.pagemappersdk.views.base.CommonLaunchedEffect
 import com.raweng.pagemapper.pagemappersdk.views.components.imageview.domain.BaseImageResponse
@@ -19,7 +21,8 @@ import com.raweng.pagemapper.pagemappersdk.views.components.imageview.viewmodel.
 internal fun RenderImageView(
     pageMapperViewModel: PageMapperViewModel,
     viewModel: ImageViewViewModel, dependency: InternalComponentDependency,
-    listener: ComponentClickListener? = null
+    componentEventListener: ComponentEventListener? = null,
+    componentAnalyticsListener: ComponentAnalyticsListener? = null
 ) {
     val uiState = viewModel.uiStateLiveData.observeAsState()
 
@@ -42,15 +45,25 @@ internal fun RenderImageView(
             data = data,
             style = dependency.item.variant.toVariant(),
             onClick = if (apiData?.ctaLink.isNullOrEmpty()) null else onImageClicked(
-                listener,
+                componentEventListener,
                 it
-            )
+            ),
+            analyticsInterface = if (apiData?.ctaLink.isNullOrEmpty()) null else object :AnalyticsInterface{
+                override fun onClick(item: String?) {
+                    componentAnalyticsListener?.onAnalyticsEvent(it,item)
+                }
+
+                override fun onImpression(item: String?) {
+                    componentAnalyticsListener?.onAnalyticsEvent(it,item)
+                }
+
+            }
         )
     }
 }
 
 private fun onImageClicked(
-    listener: ComponentClickListener? = null,
+    listener: ComponentEventListener? = null,
     responseDataModel: ResponseDataModel
 ): (() -> Unit) {
     return {

@@ -29,7 +29,7 @@ class BaseImageDataProvider(
         val response = useCase.execute(isNetworkOnly = dependency.isNetworkOnly)
         return ResponseDataModel(
             apiResponse = response,
-            convertedData = response?.toImageViewDataModel()
+            convertedData = response?.toImageViewDataModel(dependency)
         )
     }
 

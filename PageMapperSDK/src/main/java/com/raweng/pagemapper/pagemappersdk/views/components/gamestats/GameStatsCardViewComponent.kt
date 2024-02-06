@@ -6,8 +6,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.raweng.pagemapper.pagemappersdk.PageMapperSDK
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.InternalComponentDependency
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
-import com.raweng.pagemapper.pagemappersdk.utils.ComponentClickListener
-import com.raweng.pagemapper.pagemappersdk.utils.ViewModelFactory
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentEventListener
+import com.raweng.pagemapper.pagemappersdk.viewmodel.ViewModelFactory
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
 import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.provider.GameStatsDataProvider
 import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.viewmodel.GameStatsViewModel
@@ -18,7 +18,7 @@ internal fun GameStatsCardViewComponent(
     pageMapperViewModel: PageMapperViewModel,
     dependency: InternalComponentDependency,
     liveGameViewModel: LiveGameViewModel? = null,
-    listener: ComponentClickListener? = null
+    componentEventListener: ComponentEventListener? = null,
 ) {
 
     val factory = ViewModelFactory {
@@ -40,7 +40,7 @@ internal fun GameStatsCardViewComponent(
         viewModel,
         liveGameViewModel,
         dependency,
-        listener
+        componentEventListener
     )
 }
 

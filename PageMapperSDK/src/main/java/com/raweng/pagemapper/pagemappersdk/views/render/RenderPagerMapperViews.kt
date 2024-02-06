@@ -8,8 +8,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderComponentDependency
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentAnalyticsListener
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
-import com.raweng.pagemapper.pagemappersdk.utils.ComponentClickListener
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentEventListener
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
 
 @Composable
@@ -17,7 +18,8 @@ internal fun RenderPagerMapperViews(
     viewModel: PageMapperViewModel,
     dependency: RenderComponentDependency,
     liveGameViewModel: LiveGameViewModel? = null,
-    listener: ComponentClickListener? = null
+    componentEventListener: ComponentEventListener? = null,
+    componentAnalyticsListener: ComponentAnalyticsListener? = null
 ) {
     Column(
         Modifier
@@ -25,6 +27,6 @@ internal fun RenderPagerMapperViews(
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Top,
     ) {
-        RenderComponents(viewModel, dependency, liveGameViewModel, listener)
+        RenderComponents(viewModel, dependency, liveGameViewModel, componentEventListener, componentAnalyticsListener)
     }
 }

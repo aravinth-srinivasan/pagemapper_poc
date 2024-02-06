@@ -22,10 +22,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 
 class CarouselViewDataProvider(
-    private val componentDependency: InternalComponentDependency
-) : BaseProvider(componentDependency) {
+    private val dependency: InternalComponentDependency
+) : BaseProvider(dependency) {
 
-    private val mapper = CarouselMapper()
+    private val mapper = CarouselMapper(dependency)
     override suspend fun getData(): ResponseDataModel {
         val contentType = getContentType()
         return contentType?.let {
@@ -64,7 +64,7 @@ class CarouselViewDataProvider(
 
     private fun getResponseDataModel(data: Pair<CarouselViewResponse?, DFEFeedDataModel>): ResponseDataModel {
         return ResponseDataModel(
-            item = componentDependency.item,
+            item = dependency.item,
             apiResponse = data.second,
             cmsResponse = data.first,
             convertedData = getConvertedData(data)
@@ -73,10 +73,10 @@ class CarouselViewDataProvider(
 
     private fun getConvertedData(data: Pair<CarouselViewResponse?, DFEFeedDataModel>): HeroCardCarouselDataModel {
         return if (data.second.isWSCFeed) {
-            data.second.wscFeeds.toCarousalItem(data.first)
+            data.second.wscFeeds.toCarousalItem(dependency, data.first)
         } else {
-            val feedType = DFEFeedsRepository.getFeedType(componentDependency.item.dfepDataSource)
-            data.second.feeds.toCarousalItem(data.first, feedType)
+            val feedType = DFEFeedsRepository.getFeedType(dependency.item.dfepDataSource)
+            data.second.feeds.toCarousalItem(dependency, data.first, feedType)
         }
     }
 
@@ -86,7 +86,7 @@ class CarouselViewDataProvider(
 
 
     private fun isWSCFeed(): Boolean {
-        return (componentDependency.item.dfepDataSource?.lowercase()
+        return (dependency.item.dfepDataSource?.lowercase()
             ?.equals(DFEFeedsRepository.WSC_FEEDS, true) == true)
     }
 
@@ -94,10 +94,10 @@ class CarouselViewDataProvider(
         val model = DFEFeedDataModel().apply {
             val dfeFeedRepository = DFEFeedsRepository()
             val useCase = DFEFeedUseCase(dfeFeedRepository)
-            val limit = (componentDependency.item.dfepNoOfItems?.toInt() ?: 0)
+            val limit = (dependency.item.dfepNoOfItems?.toInt() ?: 0)
             if (isWSCFeed()) {
-                if (!componentDependency.dependency.gameId.isNullOrEmpty()) {
-                    wscFeeds = useCase.execute(componentDependency.dependency.gameId.orEmpty(), limit)
+                if (!dependency.dependency.gameId.isNullOrEmpty()) {
+                    wscFeeds = useCase.execute(dependency.dependency.gameId.orEmpty(), limit)
                 } else {
                     Log.e(
                         "CarouselViewDataProvider",
@@ -105,7 +105,7 @@ class CarouselViewDataProvider(
                     )
                 }
             } else {
-                feeds = useCase.execute(limit, componentDependency.item.dfepDataSource.orEmpty())
+                feeds = useCase.execute(limit, dependency.item.dfepDataSource.orEmpty())
             }
             isWSCFeed = isWSCFeed()
         }
@@ -117,7 +117,7 @@ class CarouselViewDataProvider(
         val cmsRepository = CMSEntryRepository<CarouselViewResponse>()
         val cmsUseCase =
             CMSBaseUseCase(
-                componentDependency.item,
+                dependency.item,
                 cmsRepository,
                 CarouselViewResponse::class.java
             )

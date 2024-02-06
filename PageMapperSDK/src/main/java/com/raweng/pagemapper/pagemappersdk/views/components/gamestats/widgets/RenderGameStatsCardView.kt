@@ -11,8 +11,8 @@ import com.raweng.pagemapper.pagemappersdk.domain.dependency.InternalComponentDe
 import com.raweng.pagemapper.pagemappersdk.extension.toVariant
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
 import com.raweng.pagemapper.pagemappersdk.type.ClickEventType
-import com.raweng.pagemapper.pagemappersdk.utils.ComponentClickListener
-import com.raweng.pagemapper.pagemappersdk.utils.ViewModelFactory
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentEventListener
+import com.raweng.pagemapper.pagemappersdk.viewmodel.ViewModelFactory
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
 import com.raweng.pagemapper.pagemappersdk.views.base.CommonLaunchedEffect
 import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.domain.GameStatsResponseAndStateModel
@@ -24,7 +24,7 @@ internal fun RenderGameStatsCardView(
     gameStatsViewModel: GameStatsViewModel,
     liveGameViewModel: LiveGameViewModel? = null,
     dependency: InternalComponentDependency,
-    listener: ComponentClickListener? = null
+    componentEventListener: ComponentEventListener? = null,
 ) {
     val uiState = gameStatsViewModel.uiStateLiveData.observeAsState()
 
@@ -70,7 +70,7 @@ internal fun RenderGameStatsCardView(
             style = dependency.item.variant.toVariant(),
             viewModel = componentViewModel,
             onGameStatsTrailingCardClicked = {
-                listener?.onClickedComponent(
+                componentEventListener?.onClickedComponent(
                     data = it,
                     eventType = ClickEventType.ON_GAME_STATS_TRAILING_CARD_CLICKED
                 )

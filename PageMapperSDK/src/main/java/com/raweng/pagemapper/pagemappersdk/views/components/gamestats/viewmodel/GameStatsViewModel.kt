@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.raweng.nba_components_android.components.gamestatscard.model.GameStatsCardDataModel
 import com.raweng.nba_components_android.components.gamestatscard.viewmodel.GameStatsCardViewModel
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
-import com.raweng.pagemapper.pagemappersdk.utils.BaseViewModel
+import com.raweng.pagemapper.pagemappersdk.viewmodel.BaseViewModel
 import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.mapper.GameStatsMapper
 import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.provider.GameStatsDataProvider
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.raweng.pagemapper.pagemappersdk.utils
+package com.raweng.pagemapper.pagemappersdk.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

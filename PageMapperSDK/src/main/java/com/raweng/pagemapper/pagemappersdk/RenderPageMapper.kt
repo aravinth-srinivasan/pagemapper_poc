@@ -6,8 +6,9 @@ import androidx.compose.runtime.livedata.observeAsState
 import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderComponentDependency
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderPageMapperDependency
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentAnalyticsListener
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
-import com.raweng.pagemapper.pagemappersdk.utils.ComponentClickListener
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentEventListener
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
 import com.raweng.pagemapper.pagemappersdk.views.render.RenderPagerMapperViews
 import com.raweng.pagemapper.pagemappersdk.views.render.widgets.RenderTextWidgets
@@ -17,7 +18,8 @@ fun RenderPageMapper(
     viewModel: PageMapperViewModel,
     dependency: RenderPageMapperDependency,
     liveGameViewModel: LiveGameViewModel? = null,
-    listener: ComponentClickListener? = null
+    componentEventListener: ComponentEventListener? = null,
+    analyticsListener: ComponentAnalyticsListener? = null
 ) {
     val uiState = viewModel.uiStateLiveData.observeAsState()
     LaunchedEffect(Unit) {
@@ -33,7 +35,8 @@ fun RenderPageMapper(
             viewModel,
             getRenderComponentDependency(it, dependency),
             liveGameViewModel,
-            listener
+            componentEventListener,
+            analyticsListener
         )
     }
 

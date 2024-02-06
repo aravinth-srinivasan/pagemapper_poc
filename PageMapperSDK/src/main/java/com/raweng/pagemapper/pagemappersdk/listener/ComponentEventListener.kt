@@ -1,9 +1,9 @@
-package com.raweng.pagemapper.pagemappersdk.utils
+package com.raweng.pagemapper.pagemappersdk.listener
 
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
 import com.raweng.pagemapper.pagemappersdk.type.ClickEventType
 
-interface ComponentClickListener {
+interface ComponentEventListener {
     fun onClickedComponent(
         data: ResponseDataModel,
         eventType: ClickEventType

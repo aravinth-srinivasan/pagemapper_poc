@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.raweng.pagemapper.pagemappersdk.views.components.textview.provider.BaseTextDataProvider
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.InternalComponentDependency
-import com.raweng.pagemapper.pagemappersdk.utils.ViewModelFactory
+import com.raweng.pagemapper.pagemappersdk.viewmodel.ViewModelFactory
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
 import com.raweng.pagemapper.pagemappersdk.views.components.textview.viewmodel.TextViewViewModel
 import com.raweng.pagemapper.pagemappersdk.views.components.textview.widgets.RenderTextViewComponent

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.raweng.pagemapper.pagemappersdk.domain.uistate.UiStateComponentModel
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
-import com.raweng.pagemapper.pagemappersdk.utils.BaseViewModel
+import com.raweng.pagemapper.pagemappersdk.viewmodel.BaseViewModel
 import com.raweng.pagemapper.pagemappersdk.views.components.carousel.mapper.CarouselMapper
 import com.raweng.pagemapper.pagemappersdk.views.components.carousel.provider.CarouselViewDataProvider
 import kotlinx.coroutines.Dispatchers

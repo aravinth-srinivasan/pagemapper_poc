@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.raweng.pagemapper.pagemappersdk.PageMapperSDK
 import com.raweng.pagemapper.pagemappersdk.RenderPageMapper
-import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderComponentDependency
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderPageMapperDependency
 import com.raweng.pagemapper.pagemappersdk.type.Components
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
+import com.raweng.pagemapper.poc.main.ComponentEventEvent
 import com.raweng.pagemapper.poc.ui.theme.PagemapperPocTheme
 
 class ClickEventActivity : ComponentActivity() {
@@ -34,7 +34,7 @@ class ClickEventActivity : ComponentActivity() {
                     RenderPageMapper(
                         viewModel = mViewModel,
                         dependency = RenderPageMapperDependency(),
-                        listener = ComponentClickEvent()
+                        componentEventListener = ComponentEventEvent()
                     )
                 }
             }

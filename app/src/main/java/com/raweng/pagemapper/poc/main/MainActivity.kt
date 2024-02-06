@@ -1,4 +1,4 @@
-package com.raweng.pagemapper.poc
+package com.raweng.pagemapper.poc.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -42,7 +42,8 @@ class MainActivity : ComponentActivity() {
                             viewModel = mViewModel,
                             dependency = RenderPageMapperDependency(gameId = "0022300597", parentScreenName = "Splash"),
                             liveGameViewModel = mLiveGameViewModel,
-                            listener = ComponentClickEvent()
+                            componentEventListener = ComponentEventEvent(),
+                            analyticsListener = ComponentAnalyticsEvent()
                         )
                     } ?: Text(text = "Please wait we are fetching the data...")
                 }

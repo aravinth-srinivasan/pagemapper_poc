@@ -3,9 +3,10 @@ package com.raweng.pagemapper.pagemappersdk.views.render
 import androidx.compose.runtime.Composable
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.InternalComponentDependency
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderComponentDependency
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentAnalyticsListener
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
 import com.raweng.pagemapper.pagemappersdk.type.Components
-import com.raweng.pagemapper.pagemappersdk.utils.ComponentClickListener
+import com.raweng.pagemapper.pagemappersdk.listener.ComponentEventListener
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
 import com.raweng.pagemapper.pagemappersdk.views.components.carousel.CarouselViewComponent
 import com.raweng.pagemapper.pagemappersdk.views.components.gamestats.GameStatsCardViewComponent
@@ -17,7 +18,8 @@ internal fun RenderComponents(
     viewModel: PageMapperViewModel,
     dependency: RenderComponentDependency,
     liveGameViewModel: LiveGameViewModel? = null,
-    listener: ComponentClickListener? = null
+    componentEventListener: ComponentEventListener? = null,
+    componentAnalyticsListener: ComponentAnalyticsListener? = null
 ) {
     dependency.response?.components?.forEachIndexed { _, item ->
         when (Components.fromValue(item.value.orEmpty())) {
@@ -29,7 +31,8 @@ internal fun RenderComponents(
                         item = item,
                         dependency = dependency.dependency
                     ),
-                    listener = listener
+                    componentEventListener = componentEventListener,
+                    componentAnalyticsListener = componentAnalyticsListener
                 )
             }
 
@@ -37,7 +40,7 @@ internal fun RenderComponents(
                 ImageViewComponent(
                     pageMapperViewModel = viewModel,
                     dependency = InternalComponentDependency(item, dependency.dependency),
-                    listener = listener
+                    componentEventListener = componentEventListener
                 )
             }
 
@@ -53,7 +56,7 @@ internal fun RenderComponents(
                     viewModel,
                     InternalComponentDependency(item, dependency.dependency),
                     liveGameViewModel,
-                    listener
+                    componentEventListener
                 )
             }
 

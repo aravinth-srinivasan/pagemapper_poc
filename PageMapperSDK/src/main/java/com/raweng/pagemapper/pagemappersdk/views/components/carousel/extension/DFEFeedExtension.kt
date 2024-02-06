@@ -2,21 +2,25 @@ package com.raweng.pagemapper.pagemappersdk.views.components.carousel.extension
 
 import com.raweng.dfe.models.feed.DFEFeedModel
 import com.raweng.dfe.utils.FeedType
+import com.raweng.dfe_components_android.components.herocardcarousel.model.CarouselAnalytics
 import com.raweng.dfe_components_android.components.herocardcarousel.model.CarouselItemDataModel
 import com.raweng.dfe_components_android.components.herocardcarousel.model.DetailContainerData
 import com.raweng.dfe_components_android.components.herocardcarousel.model.HeroCardCarouselDataModel
 import com.raweng.pagemapper.pagemappersdk.extension.toDate
 import com.raweng.pagemapper.pagemappersdk.extension.toSectionHeaderDataModelDynamic
 import com.raweng.pagemapper.pagemappersdk.dependency.placeholder.ComponentPlaceHolderDependency
+import com.raweng.pagemapper.pagemappersdk.domain.dependency.InternalComponentDependency
+import com.raweng.pagemapper.pagemappersdk.type.Components
 import com.raweng.pagemapper.pagemappersdk.views.components.carousel.domain.CarouselViewResponse
 
 fun List<DFEFeedModel>.toCarousalItem(
+    dependency: InternalComponentDependency,
     response: CarouselViewResponse?,
     feedType: FeedType?
 ): HeroCardCarouselDataModel {
     return HeroCardCarouselDataModel(
         sectionHeaderDataModel = response?.sectionHeader?.toSectionHeaderDataModelDynamic(),
-        itemList = this.toCarouselItemList(feedType),
+        itemList = this.toCarouselItemList(feedType, dependency),
         placeholder = ComponentPlaceHolderDependency.getCarouselPlaceholder().placeholder,
         autoScrollTimer = response?.autoScrollTimer?.toLong(),
         autoScrollEnable = response?.autoScroll ?: false,
@@ -29,26 +33,43 @@ fun List<DFEFeedModel>.toCarousalItem(
     )
 }
 
-fun List<DFEFeedModel>.toCarouselItemList(feedType: FeedType?): MutableList<CarouselItemDataModel> {
-    return map {
-        it.toCarouselItem(feedType)
+fun List<DFEFeedModel>.toCarouselItemList(
+    feedType: FeedType?,
+    dependency: InternalComponentDependency
+): MutableList<CarouselItemDataModel> {
+    return mapIndexed { index, dfeFeedModel ->
+        dfeFeedModel.toCarouselItem(feedType, dependency, index)
     }.toMutableList()
 }
 
-fun DFEFeedModel.toCarouselItem(feedType: FeedType?): CarouselItemDataModel {
+fun DFEFeedModel.toCarouselItem(
+    feedType: FeedType?,
+    dependency: InternalComponentDependency,
+    index: Int
+): CarouselItemDataModel {
+    val title = this.title.uppercase()
+    val newsId = this.newsid
     if (feedType == FeedType.VIDEO) {
         return CarouselItemDataModel(
             topContainerData = ComponentPlaceHolderDependency.getCarouselPlaceholder().carouselItemPlaceHolder?.topContainerData,
             videoUrl = getVideoUrl(this, feedType),
-            uid = this.newsid,
+            uid = newsId,
             detailContainerData = DetailContainerData(
-                trailingText = this.title.uppercase()
+                trailingText = title
+            ),
+            analytics = CarouselAnalytics(
+                title = title,
+                type = "Video",
+                component = Components.HERO_CARD_CAROUSEL_VIEW.toString(),
+                contentId = newsId,
+                orderId = index.toString(),
+                parent = dependency.dependency.parentScreenName
             )
         )
     } else if (feedType == FeedType.GALLERY) {
         val containsMedia = !this.media.isNullOrEmpty()
         return CarouselItemDataModel(
-            title = this.title,
+            title = title,
             cardImageUrl = if (containsMedia) this.media?.get(0)?.portrait
                 ?: this.media?.get(0)?.thumbnail else "",
             detailContainerData = DetailContainerData(
@@ -56,8 +77,15 @@ fun DFEFeedModel.toCarouselItem(feedType: FeedType?): CarouselItemDataModel {
                 leadingText = "GALLERY", //TODO need to confirm
                 trailingText = this.publishedDate.toDate().uppercase()
             ),
-            uid = this.newsid,
-            trailingBottomIcon = ComponentPlaceHolderDependency.getCarouselPlaceholder().carouselItemPlaceHolder?.trailingBottomIcon
+            uid = newsId,
+            trailingBottomIcon = ComponentPlaceHolderDependency.getCarouselPlaceholder().carouselItemPlaceHolder?.trailingBottomIcon,
+            analytics = CarouselAnalytics(
+                title = title,
+                type = "Gallery",
+                contentId = newsId,
+                orderId = index.toString(),
+                parent = dependency.dependency.parentScreenName
+            )
         )
     }
 

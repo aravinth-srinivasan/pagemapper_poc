@@ -1,4 +1,4 @@
-package com.raweng.pagemapper.pagemappersdk.utils
+package com.raweng.pagemapper.pagemappersdk.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

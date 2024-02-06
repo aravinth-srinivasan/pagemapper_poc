@@ -3,11 +3,13 @@ package com.raweng.pagemapper.pagemappersdk.views.components.carousel.mapper
 import com.raweng.dfe.models.playbyplay.DFEPlayByPlayModel
 import com.raweng.dfe_components_android.components.herocardcarousel.model.HeroCardCarouselDataModel
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
+import com.raweng.pagemapper.pagemappersdk.domain.dependency.InternalComponentDependency
 import com.raweng.pagemapper.pagemappersdk.views.components.carousel.domain.CarouselViewResponse
 import com.raweng.pagemapper.pagemappersdk.views.components.carousel.extension.toCarousalItem
 
-class CarouselMapper {
+class CarouselMapper(private val dependency: InternalComponentDependency) {
     private lateinit var responseDataModel: ResponseDataModel
+
     private var initialItemSize = 0
     private var newItemSize = 0
 
@@ -15,7 +17,9 @@ class CarouselMapper {
         return responseDataModel
     }
 
-    fun setResponseDataModel(responseDataModel: ResponseDataModel) {
+    fun setResponseDataModel(
+        responseDataModel: ResponseDataModel
+    ) {
         val convertedData = (responseDataModel.convertedData as HeroCardCarouselDataModel)
         initialItemSize = convertedData.itemList?.size ?: 0
         this.responseDataModel = responseDataModel
@@ -38,7 +42,8 @@ class CarouselMapper {
             val dfepNoOfItems = responseDataModel.item?.dfepNoOfItems?.toInt() ?: 0
             if (items.isNotEmpty() && responseDataModel.cmsResponse != null) {
                 val cmsResponse = (responseDataModel.cmsResponse as CarouselViewResponse)
-                val updatedData = items.take(dfepNoOfItems).toCarousalItem(cmsResponse)
+                val updatedData =
+                    items.take(dfepNoOfItems).toCarousalItem(dependency, cmsResponse)
                 val updatedResponseModel = responseDataModel.copy(convertedData = updatedData)
                 updateResponseDataModel(updatedResponseModel)
                 return updatedResponseModel

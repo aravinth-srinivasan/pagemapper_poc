@@ -19,6 +19,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.raweng.dfe_components_android.commoncomponents.imageview.ImageViewNative
 import com.raweng.dfe_components_android.commoncomponents.imageview.model.ImageViewDataModel
 import com.raweng.dfe_components_android.components.herocardcarousel.HeroCardCarouselView
+import com.raweng.dfe_components_android.components.herocardcarousel.interfaces.AnalyticsInterface
 import com.raweng.dfe_components_android.components.herocardcarousel.model.CarouselItemDataModel
 import com.raweng.dfe_components_android.components.herocardcarousel.model.HeroCardCarouselDataModel
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
@@ -34,6 +35,7 @@ internal fun HeroCardCarouselVideo(
     carouselViewModel: CarouselViewModel,
     carouselClickListener: ((String?) -> Unit)? = null,
     subHeaderClickListener: ((String?) -> Unit)? = null,
+    analyticsInterface: AnalyticsInterface? = null
 ) {
     val convertedData = (responseModel.convertedData as HeroCardCarouselDataModel)
     var onPausedCalled = false
@@ -86,6 +88,7 @@ internal fun HeroCardCarouselVideo(
                     }
                     this.subHeaderClickListener = subHeaderClickListener
                     this.carouselClickListener = carouselClickListener
+                    this.analyticsInterface = analyticsInterface
                     heroCardCarouselView = this // Store the reference
                 }
 
