@@ -45,6 +45,7 @@ class MainActivity : ComponentActivity() {
                             componentEventListener = ComponentEventEvent(),
                             analyticsListener = ComponentAnalyticsEvent()
                         )
+                        //RenderIOSPageMapper(ui = uiList, uiDelegate = object : UIDelegate { })
                     } ?: Text(text = "Please wait we are fetching the data...")
                 }
             }

@@ -2,6 +2,7 @@ package com.raweng.pagemapper.pagemappersdk.utils
 
 import android.app.Application
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.raweng.pagemapper.pagemappersdk.domain.cms.DynamicScreenResponse
 import java.io.IOException
 
@@ -33,6 +34,21 @@ internal object JSONLoader {
         return json?.let {
             val gson = Gson()
             gson.fromJson(json, DynamicScreenResponse::class.java)
+        }
+    }
+
+    internal fun getHasMapByAssetJSON(
+        application: Application?,
+        fileName: String
+    ): HashMap<String, String>? {
+        val json = application?.let {
+            loadJSONFile(it, fileName)
+        }
+
+        return json?.let {
+            val gson = Gson()
+            val type = object : TypeToken<HashMap<String, String>>() {}.type
+            return gson.fromJson(json, type)
         }
     }
 

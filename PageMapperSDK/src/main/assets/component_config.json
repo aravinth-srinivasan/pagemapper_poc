@@ -1,0 +1,6 @@
+{
+  "textView": "TextView",
+  "imageView": "ImageView",
+  "heroCardCarouselView":"HeroCardCarouselView",
+  "gameStatsCard":"GameStatsCardView"
+}

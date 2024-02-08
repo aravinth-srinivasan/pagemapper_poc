@@ -27,6 +27,7 @@ internal fun RenderPagerMapperViews(
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Top,
     ) {
-        RenderComponents(viewModel, dependency, liveGameViewModel, componentEventListener, componentAnalyticsListener)
+        //RenderComponents(viewModel, dependency, liveGameViewModel, componentEventListener, componentAnalyticsListener)
+        RenderComponentsIOS(viewModel, dependency, liveGameViewModel, componentEventListener, componentAnalyticsListener)
     }
 }

@@ -75,10 +75,12 @@ internal fun HeroCardCarouselVideo(
                 HeroCardCarouselView(
                     it
                 ).apply {
-                    configureView(
-                        dataModel = convertedData,
-                        style = responseModel.item?.variant.toVariant()
-                    )
+                    if (!convertedData.itemList.isNullOrEmpty()) {
+                        configureView(
+                            dataModel = convertedData,
+                            style = responseModel.item?.variant.toVariant()
+                        )
+                    }
                     trailingIconClickListener =
                         { carouselDataModel, player, imageView, carouselItem ->
                             muteUnMutePlayer(carouselDataModel, player, imageView, carouselItem)

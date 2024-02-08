@@ -49,6 +49,19 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.2"
     }
+    sourceSets {
+        getByName("main") {
+            jni {
+                srcDirs("src/main/jni")
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = File("src/main/jni/CMakeLists.txt")
+        }
+    }
 }
 
 dependencies {

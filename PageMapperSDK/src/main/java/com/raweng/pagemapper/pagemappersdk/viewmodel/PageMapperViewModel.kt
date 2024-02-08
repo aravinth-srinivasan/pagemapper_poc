@@ -18,7 +18,9 @@ import com.raweng.pagemapper.pagemappersdk.utils.JSONLoader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-private const val SAMPLE_PAGE_MAPPER_JSON_FILE_NAME = "pagemapper.json"
+//private const val SAMPLE_PAGE_MAPPER_JSON_FILE_NAME = "pagemapper.json"
+private const val SAMPLE_PAGE_MAPPER_JSON_FILE_NAME = "pagemapper_ios.json"
+private const val COMPONENTS_JSON_FILE_NAME = "component_config.json"
 private const val LOAD_FROM_JSON_ENABLE = true //TODO need to make this false
 
 class PageMapperViewModel : ViewModel() {
@@ -33,12 +35,15 @@ class PageMapperViewModel : ViewModel() {
 
     var allComponentDataFetched = hashMapOf<String, Boolean>()
 
+    var componentHashMap: HashMap<String, String>? = hashMapOf<String, String>()
+
 
     fun initData() {
         if (LOAD_FROM_JSON_ENABLE) {
             val response = getDemoJSONFromAsset()
             notifyUiState(response)
         }
+        componentHashMap = getComponentJSONFromAsset()
     }
 
     private fun getDemoJSONFromAsset(): DynamicScreenResponse? {
@@ -46,6 +51,15 @@ class PageMapperViewModel : ViewModel() {
             JSONLoader.getDynamicallyByAssetJSON(
                 application = it,
                 SAMPLE_PAGE_MAPPER_JSON_FILE_NAME
+            )
+        }
+    }
+
+    private fun getComponentJSONFromAsset(): HashMap<String, String>? {
+        return PageMapperSDK.getApplication()?.let {
+            JSONLoader.getHasMapByAssetJSON(
+                application = it,
+                COMPONENTS_JSON_FILE_NAME
             )
         }
     }
@@ -94,7 +108,10 @@ class PageMapperViewModel : ViewModel() {
             leagueId = PageMapperSDK.getNBAModel()?.league_id,
             teamId = PageMapperSDK.getNBAModel()?.team_id
         )
-        DFEScheduleRepository().fetchScheduleList(request, requestType = RequestType.NetworkElseDatabase)
+        DFEScheduleRepository().fetchScheduleList(
+            request,
+            requestType = RequestType.NetworkElseDatabase
+        )
     }
 
     fun getDFEConfigLiveData(): LiveData<DFEConfigModel> {

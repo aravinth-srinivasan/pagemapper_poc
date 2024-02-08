@@ -17,8 +17,8 @@ import com.raweng.pagemapper.pagemappersdk.views.components.carousel.widgets.Ren
 @Composable
 internal fun CarouselViewComponent(
     pageMapperViewModel: PageMapperViewModel,
-    liveGameViewModel: LiveGameViewModel? = null,
     dependency: InternalComponentDependency,
+    liveGameViewModel: LiveGameViewModel? = null,
     componentEventListener: ComponentEventListener? = null,
     componentAnalyticsListener: ComponentAnalyticsListener? = null
 ) {
