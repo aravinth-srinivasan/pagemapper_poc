@@ -19,10 +19,6 @@ import com.raweng.pagemapper.poc.ui.theme.PagemapperPocTheme
 class ClickEventActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PageMapperSDK.setComponentPlaceHolder(
-            Components.SOCIAL_MEDIA_LIST,
-            R.drawable.mediaplayer_placeholder
-        )
         setContent {
             val mViewModel = viewModel<PageMapperViewModel>(key = "MainActivity")
             PagemapperPocTheme {

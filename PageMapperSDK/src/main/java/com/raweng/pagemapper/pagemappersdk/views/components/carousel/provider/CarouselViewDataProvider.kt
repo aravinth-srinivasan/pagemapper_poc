@@ -73,10 +73,19 @@ class CarouselViewDataProvider(
 
     private fun getConvertedData(data: Pair<CarouselViewResponse?, DFEFeedDataModel>): HeroCardCarouselDataModel {
         return if (data.second.isWSCFeed) {
-            data.second.wscFeeds.toCarousalItem(dependency, data.first)
+            data.second.wscFeeds.toCarousalItem(
+                dependency,
+                data.first,
+                mapper.getPlaceholderManager()
+            )
         } else {
             val feedType = DFEFeedsRepository.getFeedType(dependency.item.dfepDataSource)
-            data.second.feeds.toCarousalItem(dependency, data.first, feedType)
+            data.second.feeds.toCarousalItem(
+                dependency,
+                data.first,
+                feedType,
+                mapper.getPlaceholderManager()
+            )
         }
     }
 

@@ -23,7 +23,7 @@ fun List<SocialMediaItem>.toMediaItemsList(): List<MediaItem> {
 
 fun SocialMediaItem.toMediaItem(): MediaItem {
     return MediaItem(
-        mediaImage = ComponentPlaceHolderDependency.getPlaceholder(Components.SOCIAL_MEDIA_LIST),
+        //mediaImage = ComponentPlaceHolderDependency.getPlaceholder(), //TODO handle social meadia
         mediaImageUrl = this.image?.url,
         ctaUrl = this.ctaLink,
         openTheLinkOn = this.openTheLinkOn

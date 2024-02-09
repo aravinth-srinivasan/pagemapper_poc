@@ -5,10 +5,13 @@ import com.raweng.dfe_components_android.components.herocardcarousel.model.HeroC
 import com.raweng.pagemapper.pagemappersdk.domain.ResponseDataModel
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.InternalComponentDependency
 import com.raweng.pagemapper.pagemappersdk.views.components.carousel.domain.CarouselViewResponse
+import com.raweng.pagemapper.pagemappersdk.views.components.carousel.domain.HeroCarouselPlaceHolder
 import com.raweng.pagemapper.pagemappersdk.views.components.carousel.extension.toCarousalItem
+import com.raweng.pagemapper.pagemappersdk.views.components.carousel.placeholder.CarouselPlaceHolderManager
 
 class CarouselMapper(private val dependency: InternalComponentDependency) {
     private lateinit var responseDataModel: ResponseDataModel
+    private var placeHolder = CarouselPlaceHolderManager(dependency.item.variant)
 
     private var initialItemSize = 0
     private var newItemSize = 0
@@ -43,7 +46,7 @@ class CarouselMapper(private val dependency: InternalComponentDependency) {
             if (items.isNotEmpty() && responseDataModel.cmsResponse != null) {
                 val cmsResponse = (responseDataModel.cmsResponse as CarouselViewResponse)
                 val updatedData =
-                    items.take(dfepNoOfItems).toCarousalItem(dependency, cmsResponse)
+                    items.take(dfepNoOfItems).toCarousalItem(dependency, cmsResponse, placeHolder)
                 val updatedResponseModel = responseDataModel.copy(convertedData = updatedData)
                 updateResponseDataModel(updatedResponseModel)
                 return updatedResponseModel
@@ -66,5 +69,9 @@ class CarouselMapper(private val dependency: InternalComponentDependency) {
             return ((initialItemSize + newItemSize) - maxSize)
         }
         return 0
+    }
+
+    fun getPlaceholderManager(): CarouselPlaceHolderManager {
+        return placeHolder
     }
 }

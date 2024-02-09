@@ -11,15 +11,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.raweng.pagemapper.pagemappersdk.PageMapperSDK
 import com.raweng.pagemapper.pagemappersdk.RenderPageMapper
 import com.raweng.pagemapper.pagemappersdk.domain.dependency.RenderPageMapperDependency
 import com.raweng.pagemapper.pagemappersdk.livegame.LiveGameViewModel
 import com.raweng.pagemapper.pagemappersdk.viewmodel.PageMapperViewModel
+import com.raweng.pagemapper.poc.placeholder.PlaceHolders
 import com.raweng.pagemapper.poc.ui.theme.PagemapperPocTheme
 
 class MainActivity : ComponentActivity() {
     private val mViewModel: PageMapperViewModel by viewModels()
     private val mLiveGameViewModel: LiveGameViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(mLiveGameViewModel)
@@ -40,7 +43,10 @@ class MainActivity : ComponentActivity() {
                     mConfig.value?.let {
                         RenderPageMapper(
                             viewModel = mViewModel,
-                            dependency = RenderPageMapperDependency(gameId = "0022300597", parentScreenName = "Splash"),
+                            dependency = RenderPageMapperDependency(
+                                gameId = "0022300597",
+                                parentScreenName = "Splash",
+                            ),
                             liveGameViewModel = mLiveGameViewModel,
                             componentEventListener = ComponentEventEvent(),
                             analyticsListener = ComponentAnalyticsEvent()

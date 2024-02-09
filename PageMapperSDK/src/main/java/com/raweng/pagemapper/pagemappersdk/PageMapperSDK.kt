@@ -41,8 +41,9 @@ object PageMapperSDK  {
         }
     }
 
-    fun setComponentPlaceHolder(components: Components, placeHolder: Any) {
-        ComponentPlaceHolderDependency.config(components, placeHolder)
+
+    fun setComponentPlaceHolder(placeholder: HashMap<String, Any>) {
+        ComponentPlaceHolderDependency.setPlaceholder(placeholder)
     }
 
     fun setComponentCMSIncludeRef(components: Components, includeRef: Array<String>) {
